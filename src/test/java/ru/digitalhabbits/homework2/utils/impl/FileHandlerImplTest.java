@@ -15,16 +15,11 @@ class FileHandlerImplTest {
     @Test
     public void whenSendFile_correctlyHandleAllLines() throws Exception {
 
-        var aStringMock = getHandleMock(firstLineMap());
-        var bStringMock = getHandleMock(secondLineMap());
-        var cStringMock = getHandleMock(thirdLineMap());
-
-
         LineHandler testHandler = Mockito.mock(LineHandler.class);
-        Mockito.when(testHandler.getNewHandler("aaab")).thenReturn(aStringMock);
-        Mockito.when(testHandler.getNewHandler("gggss")).thenReturn(bStringMock);
-        Mockito.when(testHandler.getNewHandler("asw")).thenReturn(cStringMock);
-
+        Mockito.when(testHandler.getNewHandler("aaab")).thenReturn(getHandleMock(firstLineMap()));
+        Mockito.when(testHandler.getNewHandler("gggss")).thenReturn(getHandleMock(secondLineMap()));
+        Mockito.when(testHandler.getNewHandler("asw")).thenReturn(getHandleMock(thirdLineMap()));
+        Mockito.when(testHandler.toString()).thenReturn("test Mock");
 
         var file = new File(getResource("testFrileReaderImpl").getPath());
         var testObject = new FileHandlerImpl(testHandler);
