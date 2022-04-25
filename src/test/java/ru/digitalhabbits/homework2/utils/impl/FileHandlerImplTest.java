@@ -16,18 +16,19 @@ class FileHandlerImplTest {
     public void whenSendFile_correctlyHandleAllLines() throws Exception {
 
         LineHandler testHandler = Mockito.mock(LineHandler.class);
+//        var aStringMock = getHandleMock(firstLineMap());
+        Mockito.when(testHandler.call()).thenReturn(firstLineMap());
+        Mockito.when(testHandler.getNewHandler("aaab")).thenReturn(testHandler);
 
-        var aStringMock = getHandleMock(firstLineMap());
-        Mockito.when(testHandler.getNewHandler("aaab")).thenReturn(aStringMock);
-
-        var bStringMock = getHandleMock(secondLineMap());
-        Mockito.when(testHandler.getNewHandler("gggss")).thenReturn(bStringMock);
-
-        var cStringMock = getHandleMock(thirdLineMap());
-        Mockito.when(testHandler.getNewHandler("asw")).thenReturn(cStringMock);
-
+//        var bStringMock = getHandleMock(secondLineMap());
+//        Mockito.when(testHandler.getNewHandler("gggss")).thenReturn(bStringMock);
+//
+//        var cStringMock = getHandleMock(thirdLineMap());
+//        Mockito.when(testHandler.getNewHandler("asw")).thenReturn(cStringMock);
+//
         var file = new File(getResource("testFrileReaderImpl").getPath());
         var testObject = new FileHandlerImpl(testHandler);
+
 
         List<Map<Character, Long>> expectedList = new ArrayList<>();
         expectedList.add(firstLineMap());
@@ -38,11 +39,11 @@ class FileHandlerImplTest {
 
     }
 
-    private LineHandler getHandleMock(Map<Character, Long> characterLongMap) throws Exception {
-        LineHandler mock = Mockito.mock(LineHandler.class);
-        Mockito.when(mock.call()).thenReturn(characterLongMap);
-        return mock;
-    }
+//    private LineHandler getHandleMock(Map<Character, Long> characterLongMap) throws Exception {
+//        LineHandler mock = Mockito.mock(LineHandler.class);
+//        Mockito.when(mock.call()).thenReturn(characterLongMap);
+//        return mock;
+//    }
 
     private Map<Character, Long> firstLineMap() {
         Map<Character, Long> map = new HashMap<>();
