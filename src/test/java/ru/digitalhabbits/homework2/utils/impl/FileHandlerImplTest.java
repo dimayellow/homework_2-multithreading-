@@ -2,40 +2,41 @@ package ru.digitalhabbits.homework2.utils.impl;
 
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
-import org.mockito.Mockito;
-import ru.digitalhabbits.homework2.utils.LineHandler;
+import ru.digitalhabbits.homework2.utils.impl.FileHandlerImpl;
 
 import java.io.File;
+import java.io.IOException;
 import java.util.*;
+import java.util.concurrent.ExecutionException;
+import java.util.concurrent.Future;
 
 import static com.google.common.io.Resources.getResource;
+import static org.junit.jupiter.api.Assertions.*;
 
 class FileHandlerImplTest {
 
     @Test
-    public void whenSendFile_correctlyHandleAllLines() throws Exception {
-
-        LineHandler testHandler = Mockito.mock(LineHandler.class);
-        Mockito.when(testHandler.getNewHandler("aaab")).thenReturn(getHandleMock(firstLineMap()));
-        Mockito.when(testHandler.getNewHandler("gggss")).thenReturn(getHandleMock(secondLineMap()));
-        Mockito.when(testHandler.getNewHandler("asw")).thenReturn(getHandleMock(thirdLineMap()));
+    public void whenSendFile_correctlyHandleAllLines() throws IOException, ExecutionException, InterruptedException {
 
         var file = new File(getResource("testFrileReaderImpl").getPath());
-        var testObject = new FileHandlerImpl(testHandler);
+        var testObject = new FileHandlerImpl();
 
-        List<Map<Character, Long>> expectedList = new ArrayList<>();
-        expectedList.add(firstLineMap());
-        expectedList.add(secondLineMap());
-        expectedList.add(thirdLineMap());
+        Set<Map<Character, Long>> expectedSet = new HashSet<>();
+        expectedSet.add(firstLineMap());
+        expectedSet.add(secondLineMap());
+        expectedSet.add(thirdLineMap());
 
-        Assertions.assertEquals(testObject.readLines(file), expectedList);
+        var result = testObject.readLines(file);
 
-    }
+        Set<Map<Character, Long>> resultSet = new HashSet<>();
 
-    private LineHandler getHandleMock(Map<Character, Long> characterLongMap) throws Exception {
-        LineHandler aStringHandler = Mockito.mock(LineHandler.class);
-        Mockito.when(aStringHandler.call()).thenReturn(characterLongMap);
-        return aStringHandler;
+        for (Future<Map<Character, Long>> f : result) {
+            resultSet.add(f.get());
+        }
+
+        Assertions.assertEquals(resultSet, expectedSet);
+        assertEquals(result.size(), 3);
+
     }
 
     private Map<Character, Long> firstLineMap() {
@@ -62,6 +63,5 @@ class FileHandlerImplTest {
 
         return map;
     }
-
 
 }

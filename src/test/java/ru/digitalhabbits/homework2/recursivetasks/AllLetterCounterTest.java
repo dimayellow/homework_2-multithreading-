@@ -10,7 +10,6 @@ import org.junit.jupiter.params.provider.ArgumentsSource;
 import org.mockito.Mockito;
 import ru.digitalhabbits.homework2.recursivetasks.AllLetterCounter;
 
-import java.nio.file.Files;
 import java.util.*;
 import java.util.concurrent.ExecutionException;
 import java.util.concurrent.ForkJoinPool;
@@ -27,6 +26,7 @@ class AllLetterCounterTest {
     public void whenSendListOfMap_returnExpectlyResult(List<Future<Map<Character, Long>>> arrayForCount,
                                                        Map<Character, Long> expectedResult
     ){
+
         ForkJoinPool pool = new ForkJoinPool(treads);
         var task = new AllLetterCounter(arrayForCount);
 
@@ -39,16 +39,26 @@ class AllLetterCounterTest {
         @Override
         public Stream<? extends Arguments> provideArguments(ExtensionContext context) {
             return Stream.of(
-                    Arguments.of(new ArrayList<Future<Map<Character, Long>>>(),
-                                Collections.emptyMap()),
-                    Arguments.of(listOfMapToListOfFuture(List.of(Collections.emptyMap())),
-                            Collections.emptyMap()),
-                    Arguments.of(listOfMapToListOfFuture(List.of(firstMap())),
-                            firstMap()),
-                    Arguments.of(listOfMapToListOfFuture(List.of(firstMap(), secondMap())),
-                            firstPlusSecondMap()),
-                    Arguments.of(listOfMapToListOfFuture(List.of(firstMap(), secondMap(), thirdMap())),
-                            sumFirstToThirdMap()));
+                    Arguments.of(
+                            new ArrayList<Future<Map<Character, Long>>>(),
+                            Collections.emptyMap()
+                    ),
+                    Arguments.of(
+                            listOfMapToListOfFuture(List.of(Collections.emptyMap()))
+                            , Collections.emptyMap()
+                    ),
+                    Arguments.of(
+                            listOfMapToListOfFuture(List.of(firstMap()))
+                            , firstMap()
+                    ),
+                    Arguments.of(
+                            listOfMapToListOfFuture(List.of(firstMap(), secondMap()))
+                            , firstPlusSecondMap()),
+                    Arguments.of(
+                            listOfMapToListOfFuture(List.of(firstMap(), secondMap(), thirdMap()))
+                            , sumFirstToThirdMap()
+                    )
+            );
         }
 
         @SneakyThrows

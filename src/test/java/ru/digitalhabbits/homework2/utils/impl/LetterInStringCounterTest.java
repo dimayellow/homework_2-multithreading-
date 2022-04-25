@@ -4,22 +4,20 @@ import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.NullAndEmptySource;
-import ru.digitalhabbits.homework2.utils.LineHandler;
+import ru.digitalhabbits.homework2.utils.impl.LetterInStringCounter;
 
 import java.util.HashMap;
 import java.util.Map;
 
 class LetterInStringCounterTest {
 
-    LineHandler lineHandler = new LetterInStringCounter();
-
     @ParameterizedTest
     @NullAndEmptySource
     public void whenSendEmptyStringOrNull_returnEmptyMap(String emptyString) {
 
-        var testObject = lineHandler.getNewHandler(emptyString);
+        var testObject = new LetterInStringCounter(emptyString);
 
-        var result = testObject.handle();
+        var result = testObject.count();
 
         Assertions.assertTrue(result.isEmpty());
 
@@ -36,8 +34,9 @@ class LetterInStringCounterTest {
         expectedMap.put('r', 2L);
         expectedMap.put(' ', 1L);
 
-        var testObject = lineHandler.getNewHandler(testString);
-        var result = testObject.handle();
+        var testObject = new LetterInStringCounter(testString);
+
+        var result = testObject.count();
 
         Assertions.assertEquals(expectedMap, result);
 

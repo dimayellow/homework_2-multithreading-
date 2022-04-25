@@ -19,12 +19,14 @@ public class E2ETests {
 
         Map<Character, Long> count = counter.count(file);
 
-        assertThat(count).containsOnly(entry('a', 2697L),
-                                    entry('b', 2683L),
-                                    entry('c', 2647L),
-                                    entry('d', 2613L),
-                                    entry('e', 2731L),
-                                    entry('f', 2629L));
+        assertThat(count).containsOnly(
+                entry('a', 2697L),
+                entry('b', 2683L),
+                entry('c', 2647L),
+                entry('d', 2613L),
+                entry('e', 2731L),
+                entry('f', 2629L)
+        );
     }
 
     private File getFile(String name) {

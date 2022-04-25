@@ -1,55 +1,42 @@
 package ru.digitalhabbits.homework2.utils.impl;
 
-import lombok.Setter;
-import ru.digitalhabbits.homework2.utils.LineHandler;
+import ru.digitalhabbits.homework2.utils.LetterCounter;
 
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
 
-public class LetterInStringCounter implements LineHandler {
+public class LetterInStringCounter implements LetterCounter {
 
-    @Setter
-    private String line;
+    private String entryString;
 
-    public LetterInStringCounter() {
-    }
-
-    @Override
-    public LineHandler getNewHandler(String line) {
-
-        LineHandler lineHandler = new LetterInStringCounter();
-        lineHandler.setLine(line);
-
-        return lineHandler;
+    public LetterInStringCounter(String entryString) {
+        this.entryString = entryString;
     }
 
     @Override
     public Map<Character, Long> call() {
-        return handle();
+        return count();
     }
 
     @Override
-    public Map<Character, Long> handle() {
+    public Map<Character, Long> count() {
 
-        return (line == null || line.isEmpty())
-                ? Collections.emptyMap()
-                : countCharsInString();
-
+        if (entryString == null || entryString.isEmpty()) {
+            return Collections.emptyMap();
+        } else {
+            return countCharsInString();
+        }
     }
-
-
-
 
     private Map<Character, Long> countCharsInString() {
 
         Map<Character, Long> reply = new HashMap<>();
-        line.chars()
+        entryString.chars()
                 .forEach(ch -> reply.compute((char) ch, (k, v) -> v == null ? 1L : ++v));
         return reply;
 
     }
-
 
 
 }
