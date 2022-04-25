@@ -15,16 +15,16 @@ class FileHandlerImplTest {
     @Test
     public void whenSendFile_correctlyHandleAllLines() throws Exception {
 
-        LineHandler testHandler = Mockito.mock(LineHandler.class);
-
         var aStringMock = getHandleMock(firstLineMap());
-        Mockito.when(testHandler.getNewHandler("aaab")).thenReturn(aStringMock);
-
         var bStringMock = getHandleMock(secondLineMap());
-        Mockito.when(testHandler.getNewHandler("gggss")).thenReturn(bStringMock);
-
         var cStringMock = getHandleMock(thirdLineMap());
+
+
+        LineHandler testHandler = Mockito.mock(LineHandler.class);
+        Mockito.when(testHandler.getNewHandler("aaab")).thenReturn(aStringMock);
+        Mockito.when(testHandler.getNewHandler("gggss")).thenReturn(bStringMock);
         Mockito.when(testHandler.getNewHandler("asw")).thenReturn(cStringMock);
+
 
         var file = new File(getResource("testFrileReaderImpl").getPath());
         var testObject = new FileHandlerImpl(testHandler);
@@ -39,9 +39,9 @@ class FileHandlerImplTest {
     }
 
     private LineHandler getHandleMock(Map<Character, Long> characterLongMap) throws Exception {
-        LineHandler mock = Mockito.mock(LineHandler.class);
-        Mockito.when(mock.call()).thenReturn(characterLongMap);
-        return mock;
+        LineHandler aStringHandler = Mockito.mock(LineHandler.class);
+        Mockito.when(aStringHandler.call()).thenReturn(characterLongMap);
+        return aStringHandler;
     }
 
     private Map<Character, Long> firstLineMap() {
