@@ -1,6 +1,7 @@
-package ru.digitalhabbits.homework2;
+package ru.digitalhabbits.homework2.utils;
 
 import java.util.Map;
+import java.util.concurrent.Callable;
 
 /**
  * Optional
@@ -11,6 +12,6 @@ import java.util.Map;
  */
 public interface LetterCountMerger {
 
-    Map<Character, Long> merge(Map<Character, Long> first, Map<Character, Long> second);
+    Map<Character, Long> merge();
 
 }
