@@ -8,7 +8,6 @@ import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.ArgumentsProvider;
 import org.junit.jupiter.params.provider.ArgumentsSource;
-import ru.digitalhabbits.homework2.utils.impl.LetterCountMergerImpl;
 
 import java.util.Collections;
 import java.util.HashMap;
@@ -35,11 +34,9 @@ class LetterCountMergerImplTest {
 
         @Override
         public Stream<? extends Arguments> provideArguments(ExtensionContext context) {
-            return Stream.of(
-                    Arguments.of(null, null),
-                    Arguments.of(null, new HashMap<Character, Long>()),
-                    Arguments.of(new HashMap<Character, Long>(), new HashMap<Character, Long>())
-            );
+            return Stream.of(Arguments.of(null, null),
+                            Arguments.of(null, new HashMap<Character, Long>()),
+                            Arguments.of(new HashMap<Character, Long>(), new HashMap<Character, Long>()));
         }
     }
 
@@ -60,12 +57,10 @@ class LetterCountMergerImplTest {
 
         @Override
         public Stream<? extends Arguments> provideArguments(ExtensionContext context) {
-            return Stream.of(
-                    Arguments.of(firstMap(), secondMap(), firstPlusSecondMap()),
-                    Arguments.of(firstMap(), thirdMap(), firstPlusThirdMap()),
-                    Arguments.of(firstMap(), null, firstMap()),
-                    Arguments.of(Collections.emptyMap(), firstMap(), firstMap())
-            );
+            return Stream.of(Arguments.of(firstMap(), secondMap(), firstPlusSecondMap()),
+                            Arguments.of(firstMap(), thirdMap(), firstPlusThirdMap()),
+                            Arguments.of(firstMap(), null, firstMap()),
+                            Arguments.of(Collections.emptyMap(), firstMap(), firstMap()));
         }
 
         private Map<Character, Long> firstMap() {

@@ -10,6 +10,7 @@ import ru.digitalhabbits.homework2.FileLetterCounter;
 import ru.digitalhabbits.homework2.recursivetasks.AllLetterCounter;
 import ru.digitalhabbits.homework2.utils.FileHandler;
 import ru.digitalhabbits.homework2.utils.impl.FileHandlerImpl;
+import ru.digitalhabbits.homework2.utils.impl.LetterInStringCounter;
 
 public class AsyncFileLetterCounter implements FileLetterCounter {
 
@@ -19,7 +20,7 @@ public class AsyncFileLetterCounter implements FileLetterCounter {
         Map<Character, Long> reply = new HashMap<>();
 
         try {
-            FileHandler handler = new FileHandlerImpl();
+            FileHandler handler = new FileHandlerImpl(new LetterInStringCounter());
             var parsedFileArray =  handler.readLines(input);
 
             ForkJoinPool pool = new ForkJoinPool(Runtime.getRuntime().availableProcessors());
