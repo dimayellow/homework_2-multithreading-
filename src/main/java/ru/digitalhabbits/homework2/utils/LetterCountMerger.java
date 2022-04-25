@@ -1,4 +1,4 @@
-package ru.digitalhabbits.homework2.mergers;
+package ru.digitalhabbits.homework2.utils;
 
 import java.util.Map;
 import java.util.concurrent.Callable;

@@ -1,9 +1,8 @@
-package ru.digitalhabbits.homework2;
+package ru.digitalhabbits.homework2.recursivetasks;
 
-import lombok.AllArgsConstructor;
 import lombok.SneakyThrows;
-import ru.digitalhabbits.homework2.mergers.LetterCountMerger;
-import ru.digitalhabbits.homework2.mergers.LetterCountMergerImpl;
+import ru.digitalhabbits.homework2.utils.LetterCountMerger;
+import ru.digitalhabbits.homework2.utils.impl.LetterCountMergerImpl;
 
 import java.util.*;
 import java.util.concurrent.Future;
@@ -20,11 +19,10 @@ public class AllLetterCounter extends RecursiveTask<Map<Character, Long>> {
         this(arrayForCount, 0, arrayForCount.size() -1);
     }
 
-    private AllLetterCounter(
-            List<Future<Map<Character, Long>>> arrayForCount
-            , int startPosition
-            , int endPosition
-    ) {
+    private AllLetterCounter(List<Future<Map<Character, Long>>> arrayForCount,
+                             int startPosition,
+                             int endPosition) {
+
         this.arrayForCount = arrayForCount;
         this.startPosition = startPosition;
         this.endPosition = endPosition;
@@ -35,43 +33,48 @@ public class AllLetterCounter extends RecursiveTask<Map<Character, Long>> {
     protected Map<Character, Long> compute() {
         Map<Character, Long> reply;
 
-        if (startPosition > endPosition)
+        if (countDifBetweenBorders(startPosition, endPosition) < 0) {
+
             reply = Collections.emptyMap();
 
-        else if (startPosition == endPosition)
+        } else if (countDifBetweenBorders(startPosition, endPosition) == 0) {
+
             reply = new HashMap<>(getElemFromArray(startPosition));
 
-        else if (endPosition - startPosition == 1)
-            reply = mergeMap(
-                    getElemFromArray(startPosition),
-                    getElemFromArray(endPosition)
-            );
+        } else if (countDifBetweenBorders(startPosition, endPosition) == 1) {
 
-        else
+            reply = mergeMap(getElemFromArray(startPosition),
+                            getElemFromArray(endPosition));
+
+        } else {
+
             reply = computeRecursively();
+
+        }
         return reply;
     }
 
+    private int countDifBetweenBorders(int startPosition, int endPosition) {
+        return (endPosition - startPosition);
+    }
+
     private Map<Character, Long> computeRecursively() {
+
         int midPosition = (startPosition + endPosition) / 2;
         AllLetterCounter firstCounter = new AllLetterCounter(arrayForCount, startPosition, midPosition);
         AllLetterCounter secondCounter = new AllLetterCounter(arrayForCount, midPosition + 1, endPosition);
+
         firstCounter.fork();
-        return mergeMap(
-                firstCounter.join(),
-                secondCounter.compute()
-        );
+
+        return mergeMap(firstCounter.join(),
+                        secondCounter.compute());
     }
 
-    private Map<Character, Long> mergeMap(
-            Map<Character, Long> firstMap,
-            Map<Character, Long> seconfMap
-    ) {
+    private Map<Character, Long> mergeMap(Map<Character, Long> firstMap,
+                                        Map<Character, Long> seconfMap) {
 
-        LetterCountMerger merger = new LetterCountMergerImpl(
-                firstMap,
-                seconfMap
-        );
+        LetterCountMerger merger = new LetterCountMergerImpl(firstMap,
+                                                            seconfMap);
         return merger.merge();
     }
 

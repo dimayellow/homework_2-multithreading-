@@ -1,4 +1,4 @@
-package ru.digitalhabbits.homework2.impl;
+package ru.digitalhabbits.homework2.utils.impl;
 
 import lombok.NoArgsConstructor;
 import org.junit.jupiter.api.Assertions;
@@ -8,7 +8,7 @@ import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.ArgumentsProvider;
 import org.junit.jupiter.params.provider.ArgumentsSource;
-import ru.digitalhabbits.homework2.mergers.LetterCountMergerImpl;
+import ru.digitalhabbits.homework2.utils.impl.LetterCountMergerImpl;
 
 import java.util.Collections;
 import java.util.HashMap;

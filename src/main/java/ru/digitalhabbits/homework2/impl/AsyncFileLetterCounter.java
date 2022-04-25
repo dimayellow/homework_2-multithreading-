@@ -2,21 +2,14 @@ package ru.digitalhabbits.homework2.impl;
 
 import java.io.File;
 import java.io.IOException;
-import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
-import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.ForkJoinPool;
-import java.util.stream.Stream;
 
-import ru.digitalhabbits.homework2.AllLetterCounter;
 import ru.digitalhabbits.homework2.FileLetterCounter;
-import ru.digitalhabbits.homework2.counters.LetterCounter;
-import ru.digitalhabbits.homework2.counters.LetterInStringCounter;
-import ru.digitalhabbits.homework2.fileHandlers.FileHandler;
-import ru.digitalhabbits.homework2.fileHandlers.FileHandlerImpl;
-import ru.digitalhabbits.homework2.mergers.LetterCountMerger;
-import ru.digitalhabbits.homework2.mergers.LetterCountMergerImpl;
+import ru.digitalhabbits.homework2.recursivetasks.AllLetterCounter;
+import ru.digitalhabbits.homework2.utils.FileHandler;
+import ru.digitalhabbits.homework2.utils.impl.FileHandlerImpl;
 
 public class AsyncFileLetterCounter implements FileLetterCounter {
 

@@ -1,6 +1,7 @@
-package ru.digitalhabbits.homework2.mergers;
+package ru.digitalhabbits.homework2.utils.impl;
 
 import lombok.AllArgsConstructor;
+import ru.digitalhabbits.homework2.utils.LetterCountMerger;
 
 import java.util.Collections;
 import java.util.HashMap;
@@ -17,32 +18,25 @@ public class LetterCountMergerImpl implements LetterCountMerger {
     @Override
     public Map<Character, Long> merge() {
 
-        Map<Character, Long> reply;
-
-        if (itsEmptyMap(first) || itsEmptyMap(second))
-            reply = new HashMap<>(mergeWithEmptyOrNyllMap());
-        else {
-            reply = mergeNotEmptyMap();
-        }
-
-        return reply;
+        return (itsEmptyMap(first) || itsEmptyMap(second))
+                ? mergeWithEmptyOrNullMap()
+                : mergeNotEmptyMap();
     }
 
     private Map<Character, Long> mergeNotEmptyMap() {
 
         return Stream.concat(first.entrySet().stream(), second.entrySet().stream())
-                .collect(Collectors.toMap(Map.Entry::getKey
-                        , Map.Entry::getValue
-                        , Long::sum));
+                .collect(Collectors.toMap(Map.Entry::getKey, Map.Entry::getValue, Long::sum));
     }
 
-    private Map<Character, Long> mergeWithEmptyOrNyllMap() {
-        if (itsEmptyMap(first) && itsEmptyMap(second))
+    private Map<Character, Long> mergeWithEmptyOrNullMap() {
+        if (itsEmptyMap(first) && itsEmptyMap(second)) {
             return Collections.emptyMap();
-        else if (itsEmptyMap(first))
-            return second;
-        else
-            return first;
+        } else if (itsEmptyMap(first)) {
+            return new HashMap<>(second);
+        } else {
+            return new HashMap<>(first);
+        }
     }
 
     private boolean itsEmptyMap(Map<Character, Long> map) {

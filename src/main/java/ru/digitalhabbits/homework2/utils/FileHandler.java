@@ -1,4 +1,4 @@
-package ru.digitalhabbits.homework2.fileHandlers;
+package ru.digitalhabbits.homework2.utils;
 
 import java.io.File;
 import java.io.IOException;

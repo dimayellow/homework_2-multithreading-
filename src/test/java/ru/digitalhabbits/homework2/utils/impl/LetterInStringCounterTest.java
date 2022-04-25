@@ -1,9 +1,10 @@
-package ru.digitalhabbits.homework2.counters;
+package ru.digitalhabbits.homework2.utils.impl;
 
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.NullAndEmptySource;
+import ru.digitalhabbits.homework2.utils.impl.LetterInStringCounter;
 
 import java.util.HashMap;
 import java.util.Map;

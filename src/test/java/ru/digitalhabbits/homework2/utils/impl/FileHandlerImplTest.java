@@ -1,15 +1,14 @@
-package ru.digitalhabbits.homework2.fileHandlers;
+package ru.digitalhabbits.homework2.utils.impl;
 
-import lombok.SneakyThrows;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
+import ru.digitalhabbits.homework2.utils.impl.FileHandlerImpl;
 
 import java.io.File;
 import java.io.IOException;
 import java.util.*;
 import java.util.concurrent.ExecutionException;
 import java.util.concurrent.Future;
-import java.util.stream.Stream;
 
 import static com.google.common.io.Resources.getResource;
 import static org.junit.jupiter.api.Assertions.*;

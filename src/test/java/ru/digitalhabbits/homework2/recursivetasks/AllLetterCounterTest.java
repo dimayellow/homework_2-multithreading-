@@ -1,4 +1,4 @@
-package ru.digitalhabbits.homework2;
+package ru.digitalhabbits.homework2.recursivetasks;
 
 import lombok.SneakyThrows;
 import org.junit.jupiter.api.Assertions;
@@ -8,6 +8,7 @@ import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.ArgumentsProvider;
 import org.junit.jupiter.params.provider.ArgumentsSource;
 import org.mockito.Mockito;
+import ru.digitalhabbits.homework2.recursivetasks.AllLetterCounter;
 
 import java.util.*;
 import java.util.concurrent.ExecutionException;
